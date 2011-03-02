@@ -30,7 +30,12 @@
   border-width: 1px;
 }
 
-/* This element will be rotated to change the time. No rotation corresponds to the 12 o'clock position. */
+.circular {
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+}
+
+/* This element will be rotated to change the time. 0 rotation corresponds to the 12 o'clock position. */
 .clockHandContainer {
   width: 100%;
   height: 100%;
@@ -46,17 +51,19 @@
 .clockSecondHandVisual, .clockMasterHandVisual {
   margin-left: auto;
   margin-right: auto;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
 }
 
 .clockSecondHandVisual {
   width: 10px;
-  height: 50px;
+  height: 55px;
   background-color: red;
 }
 
 .clockMasterHandVisual {
   width: 10px;
-  height: 40px;
+  height: 45px;
   margin-top: 10px;
   background-color: blue;
 }
@@ -68,6 +75,7 @@
   border-color: black;
   border-style: solid;
   border-width: 1px;
+  
   transform: translate(80px, 80px) scale(1.5, 1.5) rotate(45deg);
   -webkit-transform: translate(80px, 80px) scale(1.5, 1.5) rotate(45deg);
   -o-transform: translate(80px, 80px) scale(1.5, 1.5) rotate(45deg);

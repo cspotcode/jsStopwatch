@@ -3,7 +3,7 @@
 // target is a jQuery object matching a .clockContainer
 // totalTime is total time to countdown in seconds
 function startClock(target, totalTime) {
-  var t, d;
+  var t, d, intervalFn;
   t = target;
   
   // if data object already exists, clock is running. Stop it.
@@ -16,15 +16,31 @@ function startClock(target, totalTime) {
   d = {};
   target.data('clock', d);
   
+  d.totalTime = totalTime * 1000;
+  
   // grab current time to use as offset (time in milliseconds)
-  d.timeOffset = new Date() * 1.0;
-  d.timeOffset += totalTime * 1000;
+  d.startTime = new Date() * 1.0;
+  
+  d.backward = false;
   
   // update every second
-  d.interval = setInterval(function() {
-    var time = new Date() * 1.0;
-    t.find('.clockSecondHand').css('transform', 'rotate(' + (time - d.timeOffset) * 360/60/1000 + 'deg)');
-  }, 1000);
+  intervalFn = function() {
+    var time, secondHandPosition, masterHandPosition, timeElapsed, timeRemaining;
+    time = new Date() * 1.0;
+    timeElapsed = time - d.startTime;
+    timeRemaining = d.totalTime - timeElapsed;
+    secondHandPosition = ((timeRemaining / 1000) - 1) * 360/60;
+    masterHandPosition = (timeRemaining - 1000) * 360/d.totalTime;
+    if(d.backward) {
+      secondHandPosition = -secondHandPosition;
+      masterHandPosition = -masterHandPosition;
+    }
+    t.find('.clockSecondHand').css('transform', 'rotate(' + secondHandPosition + 'deg)');
+    t.find('.clockMasterHand').css('transform', 'rotate(' + masterHandPosition + 'deg)');
+  };
+  d.interval = setInterval(intervalFn, 1000);
+  // also, run immediately!  This makes the clock hand start moving immediately
+  intervalFn();
 }
 
 // stop a clock's animation
