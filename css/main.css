@@ -21,6 +21,7 @@
   transform: scale(3, 3);
   -o-transform: scale(3, 3);
   -webkit-transform: scale(3, 3);
+  -moz-transform: scale(3, 3);
 }
 
 .blackOutline {
@@ -36,9 +37,10 @@
   position: absolute;
   text-align: center;
   
-  transition: -webkit-transform 1s ease-out;
-  -o-transition: -webkit-transform 1s ease-out;
+  transition: transform 1s ease-out;
+  -o-transition: -o-transform 1s ease-out;
   -webkit-transition: -webkit-transform 1s ease-out;
+  -moz-transition: -moz-transform 1s ease-out;
 }
 
 .clockSecondHandVisual, .clockMasterHandVisual {

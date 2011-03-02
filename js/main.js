@@ -43,24 +43,31 @@ function stopClock(target) {
 (function() {
   var tempDiv = document.createElement('div');
   $.each([
-    ['transform', 'OTransform', '-webkit-transform'],
-    ['transition', 'OTransition', '-webkit-transition']
+    [['transform', 'transform'],
+     ['-o-transform', 'OTransform'],
+     ['-webkit-transform', 'webkitTransform'],
+     ['-moz-transform', 'MozTransform']],
+    [['transition', 'transition'],
+     ['-o-transition', 'OTransition'],
+     ['-webkit-transition', 'webkitTransition'],
+     ['-moz-transition', 'MozTransition']],
   ], function(i, v) {
     var supported = false;
     $.each(v, function(i2, v2) {
-      if (tempDiv.style[v2] === '') {
-        supported = v2;
+      if (tempDiv.style[v2[1]] === '') {
+        supported = v2[0];
         return false;
       }
     });
     
-    if(!(supported == v[0])) {
-      $.cssHooks[v[0]] = {
+    if(!(supported == v[0][0])) {
+      $.cssHooks[v[0][0]] = {
         get: function( elem, computed, extra ) {
           return $.css(elem, supported);
         },
         set: function( elem, value ) {
-          elem.style[supported] = value;
+          elem.style.setProperty(supported, value, null);
+          // TODO lol use setAttribute on IE
         }
       };
     }
