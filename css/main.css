@@ -35,6 +35,12 @@
   -moz-border-radius: 50%;
 }
 
+.clockFace {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
 /* This element will be rotated to change the time. 0 rotation corresponds to the 12 o'clock position. */
 .clockHandContainer {
   width: 100%;
