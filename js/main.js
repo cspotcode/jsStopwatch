@@ -62,11 +62,13 @@ function stopClock(target) {
     [['transform', 'transform'],
      ['-o-transform', 'OTransform'],
      ['-webkit-transform', 'webkitTransform'],
-     ['-moz-transform', 'MozTransform']],
+     ['-moz-transform', 'MozTransform'],
+     ['-ms-transform', 'msTransform']],
     [['transition', 'transition'],
      ['-o-transition', 'OTransition'],
      ['-webkit-transition', 'webkitTransition'],
-     ['-moz-transition', 'MozTransition']],
+     ['-moz-transition', 'MozTransition'],
+     ['-ms-transition', 'msTransition']],
   ], function(i, v) {
     var supported = false;
     $.each(v, function(i2, v2) {
